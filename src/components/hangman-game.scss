@@ -1,0 +1,11 @@
+.list {
+    list-style: none;
+
+    &__item {
+        display: inline-block;
+        border: 1px solid;
+        margin: 0 5px;
+        padding: 5px;
+        cursor: pointer;
+    }
+}
