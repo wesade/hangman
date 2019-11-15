@@ -47,6 +47,7 @@ export class HangmanGame {
     render() {
         return <div>
             <Alphabet onCtaClick={this.handleCtaClick.bind(this)}></Alphabet>
+            <span>You had {this.clicks} clicks!</span>
             {this.showHint && <Hint text={this.text}></Hint>}
             <Word word={this.word} clickedChars={this.clickedChars} />
         </div>;
