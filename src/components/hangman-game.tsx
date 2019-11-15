@@ -15,6 +15,8 @@ export class HangmanGame {
         console.log('####', e.target.innerHTML);
     }
 
+
+    // just to force a merge
     render() {
         return <div>
             <Alphabet onCtaClick={this.handleCtaClick.bind(this)}></Alphabet>
