@@ -29,6 +29,9 @@ export class HangmanGame {
         if(!isLetterInWord) {
             this.text = letter + " is not in the word!";
             this.showHint = true
+        } else {
+            this.text = "Great, " + letter + " is in the word!";
+            this.showHint = true
         }
 
         if(service.reachedMaxClicks(this.clicks)) {

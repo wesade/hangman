@@ -33,4 +33,18 @@ describe('hangman game', () => {
 
         expect(page.root.shadowRoot.querySelector('.hint').textContent).toEqual('X is not in the word!');
     });
+
+    it('should render a hint if clicked char is in word.', async () => {
+        const page = await newSpecPage({ components: [HangmanGame] });
+        await page.setContent(`
+            <hangman-game></hangman-game>
+       `);
+
+        jest.spyOn(service, 'isLetterInWord').mockImplementation(() => true);
+
+        (page.root.shadowRoot.querySelector('li[id=A]') as HTMLElement).click();
+        await page.waitForChanges();
+
+        expect(page.root.shadowRoot.querySelector('.hint').textContent).toEqual('Great, A is in the word!');
+    });
 });
