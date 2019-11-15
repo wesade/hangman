@@ -12,4 +12,8 @@ describe('service', () => {
     it('should return true if letter is in word', () => {
         expect(service.isLetterInWord('A', 'CHRISTMAS')).toBeTruthy();
     });
+
+    it('should return true if char was already clicked', () => {
+        expect(service.isCharAlreadyInArray('B', ['B'])).toBeTruthy();
+    });
 });

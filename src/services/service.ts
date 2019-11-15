@@ -13,10 +13,15 @@ const isLetterInWord = (letter, wordToGuess) => {
     return wordToGuess.match(letter);
 };
 
+const isCharAlreadyInArray = (char, allChars) => {
+    return allChars.includes(char);
+};
+
 const service = {
     reachedMaxClicks,
     randomWordToGuess,
-    isLetterInWord
+    isLetterInWord,
+    isCharAlreadyInArray
 };
 
 export default service;

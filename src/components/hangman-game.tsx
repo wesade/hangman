@@ -1,5 +1,6 @@
 import {Component, Prop, State, h, Event, EventEmitter} from '@stencil/core';
 import { Alphabet } from './alphabet';
+import { Counter } from './counter';
 import { Hint } from './hint';
 import { Word } from './word';
 import service from '../services/service';
@@ -21,8 +22,11 @@ export class HangmanGame {
     handleCtaClick(e) {
         this.ctaClick.emit(e);
         const letter = e.target.innerHTML;
-        this.clickedChars.push(letter);
         this.clicks += 1;
+
+        if(!service.isCharAlreadyInArray(letter, this.clickedChars)) {
+            this.clickedChars.push(letter);
+        }
 
         const isLetterInWord = service.isLetterInWord(letter, this.word);
 
@@ -47,7 +51,7 @@ export class HangmanGame {
     render() {
         return <div>
             <Alphabet onCtaClick={this.handleCtaClick.bind(this)}></Alphabet>
-            <span>You had {this.clicks} clicks!</span>
+            <Counter clicks={this.clicks} chars={this.clickedChars}></Counter>
             {this.showHint && <Hint text={this.text}></Hint>}
             <Word word={this.word} clickedChars={this.clickedChars} />
         </div>;
