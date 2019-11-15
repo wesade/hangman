@@ -8,7 +8,7 @@ export const Alphabet = ( {onCtaClick} ) => {
         <ul class="list">
             {alphabet.map( letter => {
                 return (
-                    <li class="list__item" onClick={onCtaClick}>{letter}</li>
+                    <li id={letter} class="list__item" onClick={onCtaClick}>{letter}</li>
                 );
             })}
         </ul>
