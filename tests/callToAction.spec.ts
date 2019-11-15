@@ -10,12 +10,13 @@ describe('hangman game', () => {
             </hangman-game>
         `);
 
+        let result;
         page.root.addEventListener('ctaClick', () => {
-            console.log('A')
+            result = true;
         });
 
         (page.root.shadowRoot.querySelector('li') as HTMLElement).click();
 
-        //await expect(result).toBeTruthy();
+        await expect(result).toBeTruthy();
     });
 });
