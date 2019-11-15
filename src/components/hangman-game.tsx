@@ -41,8 +41,6 @@ export class HangmanGame {
         this.word = service.randomWordToGuess();
     }
 
-
-    // just to force a merge
     render() {
         return <div>
             <Alphabet onCtaClick={this.handleCtaClick.bind(this)}></Alphabet>
