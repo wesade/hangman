@@ -17,5 +17,5 @@ export const Word = ({word, clickedChars}) => {
         return underscoredWord;
     };
 
-    return <p class="word"><span>{word}</span>{replaceCharsWithUnderScore(word, clickedChars)}</p>;
+    return <p class="word">{replaceCharsWithUnderScore(word, clickedChars)}</p>;
 };
