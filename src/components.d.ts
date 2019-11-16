@@ -30,6 +30,7 @@ declare global {
 
 declare namespace LocalJSX {
   interface HangmanGame {
+    'onButtonClick'?: (event: CustomEvent<any>) => void;
     'onCtaClick'?: (event: CustomEvent<any>) => void;
     'text'?: string;
   }

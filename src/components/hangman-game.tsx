@@ -4,6 +4,7 @@ import { Counter } from './counter';
 import { Hint } from './hint';
 import { Word } from './word';
 import service from '../services/service';
+import {Button} from "./button";
 
 @Component({
     tag: 'hangman-game',
@@ -17,7 +18,9 @@ export class HangmanGame {
     @State() showHint: boolean = false;
     @State() word: string = '';
     @State() clickedChars: string[] = [];
+    @State() rerenderPage: boolean = false;
     @Event() ctaClick: EventEmitter;
+    @Event() buttonClick: EventEmitter;
 
     handleCtaClick(e) {
         this.ctaClick.emit(e);
@@ -41,7 +44,13 @@ export class HangmanGame {
         if(service.reachedMaxClicks(this.clicks)) {
             this.text = "Maximum clicks (" + this.clicks + ") reached!";
             this.showHint = true;
+            this.rerenderPage = true;
         }
+    }
+
+    handleButtonClick(e) {
+        this.buttonClick.emit(e);
+        window.location.reload();
     }
 
     componentWillLoad() {
@@ -54,6 +63,7 @@ export class HangmanGame {
             <Counter clicks={this.clicks} chars={this.clickedChars}></Counter>
             {this.showHint && <Hint text={this.text}></Hint>}
             <Word word={this.word} clickedChars={this.clickedChars} />
+            {this.rerenderPage && <Button onButtonClick={this.handleButtonClick.bind(this)}></Button>}
         </div>;
     }
 }

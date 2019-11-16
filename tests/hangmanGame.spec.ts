@@ -47,4 +47,31 @@ describe('hangman game', () => {
 
         expect(page.root.shadowRoot.querySelector('.hint').textContent).toEqual('Great, A is in the word!');
     });
+
+    it('should not render a button if max count is not reached', async () => {
+        const page = await newSpecPage({ components: [HangmanGame] });
+        await page.setContent(`
+            <hangman-game></hangman-game>
+       `);
+
+       (page.root.shadowRoot.querySelector('li') as HTMLElement).click();
+
+       await page.waitForChanges();
+
+       expect(page.root.shadowRoot.querySelector('.button')).toBeFalsy();
+    });
+
+    it('should render a button if max count is reached', async () => {
+        const page = await newSpecPage({ components: [HangmanGame] });
+        await page.setContent(`
+            <hangman-game></hangman-game>
+       `);
+
+        for(let i = 1; i <= MAX_CLICKS; i++) {
+            (page.root.shadowRoot.querySelector('li') as HTMLElement).click();
+        }
+        await page.waitForChanges();
+
+        expect(page.root.shadowRoot.querySelector('.button').textContent).toEqual('Restart!');
+    });
 });
