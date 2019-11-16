@@ -10,9 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface HangmanGame {
-    'text': string;
-  }
+  interface HangmanGame {}
 }
 
 declare global {
@@ -31,8 +29,7 @@ declare global {
 declare namespace LocalJSX {
   interface HangmanGame {
     'onButtonClick'?: (event: CustomEvent<any>) => void;
-    'onCtaClick'?: (event: CustomEvent<any>) => void;
-    'text'?: string;
+    'onCharClick'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {

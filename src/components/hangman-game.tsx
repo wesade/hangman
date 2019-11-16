@@ -1,4 +1,4 @@
-import {Component, Prop, State, h, Event, EventEmitter} from '@stencil/core';
+import {Component, State, h, Event, EventEmitter} from '@stencil/core';
 import { Alphabet } from './alphabet';
 import { Counter } from './counter';
 import { Hint } from './hint';
@@ -13,17 +13,18 @@ import {Button} from "./button";
 })
 export class HangmanGame {
 
-    @Prop() text: string;
+    @State() text: string;
+    @State() className: string = '';
     @State() clicks: number = 0;
     @State() showHint: boolean = false;
     @State() word: string = '';
     @State() clickedChars: string[] = [];
     @State() rerenderPage: boolean = false;
-    @Event() ctaClick: EventEmitter;
+    @Event() charClick: EventEmitter;
     @Event() buttonClick: EventEmitter;
 
-    handleCtaClick(e) {
-        this.ctaClick.emit(e);
+    handleCharClick(e) {
+        this.charClick.emit(e);
         const letter = e.target.innerHTML;
         this.clicks += 1;
 
@@ -45,6 +46,7 @@ export class HangmanGame {
             this.text = "Maximum clicks (" + this.clicks + ") reached!";
             this.showHint = true;
             this.rerenderPage = true;
+            this.className = ' disabled'
         }
     }
 
@@ -59,7 +61,7 @@ export class HangmanGame {
 
     render() {
         return <div>
-            <Alphabet onCtaClick={this.handleCtaClick.bind(this)}></Alphabet>
+            <Alphabet className={this.className} onCharClick={this.handleCharClick.bind(this)}></Alphabet>
             <Counter clicks={this.clicks} chars={this.clickedChars}></Counter>
             {this.showHint && <Hint text={this.text}></Hint>}
             <Word word={this.word} clickedChars={this.clickedChars} />

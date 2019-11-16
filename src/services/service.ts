@@ -1,5 +1,5 @@
 const MAX_CLICKS = 15;
-const WORDS_TO_GUESS = ['APPLE', 'STRAWBERRY', 'BANANA', 'YUCATAN'];
+const WORDS_TO_GUESS = ['APPLE', 'STRAWBERRY', 'BANANA'];
 
 const reachedMaxClicks = (clicks) => {
     return clicks === MAX_CLICKS;

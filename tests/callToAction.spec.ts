@@ -11,7 +11,7 @@ describe('hangman game', () => {
         `);
 
         let result;
-        page.root.addEventListener('ctaClick', () => {
+        page.root.addEventListener('charClick', () => {
             result = true;
         });
 
