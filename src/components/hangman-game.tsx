@@ -3,8 +3,8 @@ import { Alphabet } from './alphabet';
 import { Counter } from './counter';
 import { Hint } from './hint';
 import { Word } from './word';
+import { Button } from "./button";
 import service from '../services/service';
-import {Button} from "./button";
 
 @Component({
     tag: 'hangman-game',
@@ -20,6 +20,7 @@ export class HangmanGame {
     @State() word: string = '';
     @State() clickedChars: string[] = [];
     @State() rerenderPage: boolean = false;
+    @State() isWordSolved: boolean = false;
     @Event() charClick: EventEmitter;
     @Event() buttonClick: EventEmitter;
 
@@ -59,12 +60,27 @@ export class HangmanGame {
         this.word = service.randomWordToGuess();
     }
 
+    componentDidUpdate() {
+        if (this.isWordSolved) {
+            this.text = "You won!";
+            this.showHint = true;
+            this.rerenderPage = true;
+            this.className = ' disabled'
+        }
+    }
+
     render() {
+
+        const word = <Word word={this.word} clickedChars={this.clickedChars}/>;
+        if (this.word === word.$children$[0].$text$) {
+            this.isWordSolved = true;
+        }
+
         return <div>
             <Alphabet className={this.className} onCharClick={this.handleCharClick.bind(this)}></Alphabet>
             <Counter clicks={this.clicks} chars={this.clickedChars}></Counter>
             {this.showHint && <Hint text={this.text}></Hint>}
-            <Word word={this.word} clickedChars={this.clickedChars} />
+            {word}
             {this.rerenderPage && <Button onButtonClick={this.handleButtonClick.bind(this)}></Button>}
         </div>;
     }

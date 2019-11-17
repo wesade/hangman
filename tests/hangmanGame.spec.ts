@@ -74,6 +74,22 @@ describe('hangman game', () => {
         expect(page.root.shadowRoot.querySelector('.hint').textContent).toEqual('Great, A is in the word!');
     });
 
+    it('should render a text if word was solved', async () => {
+        const page = await newSpecPage({ components: [HangmanGame] });
+
+        jest.spyOn(service, 'randomWordToGuess').mockImplementation(() => 'W');
+
+        await page.setContent(`
+            <hangman-game></hangman-game>
+       `);
+
+        (page.root.shadowRoot.querySelector('li[id=W]') as HTMLElement).click();
+        await page.waitForChanges();
+
+
+        expect(page.root.shadowRoot.querySelector('.hint').textContent).toEqual('You won!');
+    });
+
     it('should not render a button if max count is not reached', async () => {
         const page = await newSpecPage({components: [HangmanGame]});
         await page.setContent(`
@@ -81,7 +97,6 @@ describe('hangman game', () => {
        `);
 
         (page.root.shadowRoot.querySelector('li') as HTMLElement).click();
-
         await page.waitForChanges();
 
         expect(page.root.shadowRoot.querySelector('.button')).toBeFalsy();
