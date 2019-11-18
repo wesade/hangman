@@ -1,8 +1,8 @@
 import { h } from '@stencil/core';
 
-export const Word = ({word, clickedChars}) => {
+export const Word = ({word, clickedChars, onHandleWinner}) => {
 
-    const replaceCharsWithUnderScore = (randomWordToGuess, clickedChars) => {
+    const replaceCharsWithUnderScore = (randomWordToGuess, clickedChars, onHandleWinner) => {
         let underscoredWord = '';
 
         for (let i = 0; i < randomWordToGuess.length; i++) {
@@ -14,8 +14,12 @@ export const Word = ({word, clickedChars}) => {
             }
         }
 
+        if(word === underscoredWord) {
+            onHandleWinner();
+        }
+
         return underscoredWord;
     };
 
-    return <p class="word">{replaceCharsWithUnderScore(word, clickedChars)}</p>;
+    return <p class="word">{replaceCharsWithUnderScore(word, clickedChars, onHandleWinner)}</p>;
 };

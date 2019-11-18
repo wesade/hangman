@@ -60,21 +60,16 @@ export class HangmanGame {
         this.word = service.randomWordToGuess();
     }
 
-    componentDidUpdate() {
-        if (this.isWordSolved) {
-            this.text = "You won!";
-            this.showHint = true;
-            this.rerenderPage = true;
-            this.className = ' disabled'
-        }
+    handleWinner() {
+        this.text = "You won!";
+        this.showHint = true;
+        this.rerenderPage = true;
+        this.className = ' disabled'
     }
 
     render() {
 
-        const word = <Word word={this.word} clickedChars={this.clickedChars}/>;
-        if (this.word === word.$children$[0].$text$) {
-            this.isWordSolved = true;
-        }
+        const word = <Word word={this.word} clickedChars={this.clickedChars} onHandleWinner={this.handleWinner.bind(this)}/>;
 
         return <div>
             <Alphabet className={this.className} onCharClick={this.handleCharClick.bind(this)}></Alphabet>
