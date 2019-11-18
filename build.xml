@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<project name="hangman" basedir="." default="build">
+    <property name="build.dir" value="build"/>
+    <property name="src" location="src"/>
+    <property name="tests" location="tests"/>
+    <property name="package.json"  location=""/>
+    <property name="package-lock.json"  location=""/>
+    <property name="stencil.config.ts"  location=""/>
+    <property name="tsconfig.json"  location=""/>
+
+    <target name = "info">
+        <echo>Ant for hangman</echo>
+        <tstamp>
+            <format property="TODAY" pattern="dd.MM.yyyy HH:mm:ss:sss zzz" locale="de,DE"/>
+        </tstamp>
+        <echo>Build Datum ${TODAY}</echo>
+
+        <echo>Apache Ant Version:	${ant.version}</echo>
+    </target>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="build" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <copy todir="build/src">
+            <fileset dir="src"/>
+        </copy>
+        <copy todir="build/tests">
+            <fileset dir="tests"/>
+        </copy>
+        <copy file="package.json" todir="build"/>
+        <copy file="package-lock.json" todir="build"/>
+        <copy file="stencil.config.ts" todir="build"/>
+        <copy file="tsconfig.json" todir="build"/>
+    </target>
+
+    <exec executable="npm">
+        <arg line="install" />
+        <arg line="run test" />
+        <arg line="run build" />
+    </exec>
+
+</project>
