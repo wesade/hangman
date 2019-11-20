@@ -1,45 +1,49 @@
-<?xml version="1.0"?>
-<project name="hangman" basedir="." default="build">
-    <property name="build.dir" value="build"/>
-    <property name="src" location="src"/>
-    <property name="tests" location="tests"/>
-    <property name="package.json"  location=""/>
-    <property name="package-lock.json"  location=""/>
-    <property name="stencil.config.ts"  location=""/>
-    <property name="tsconfig.json"  location=""/>
+<?xml version = "1.0"?>
+<project name = "hangman" basedir = "." default = "build">
+    <property name = "build.dir" value = "build"/>
+    <property name = "src.dir" value = "src"/>
+    <property name = "tests.dir" value = "tests"/>
 
     <target name = "info">
         <echo>Ant for hangman</echo>
         <tstamp>
-            <format property="TODAY" pattern="dd.MM.yyyy HH:mm:ss:sss zzz" locale="de,DE"/>
+            <format property = "TODAY" pattern = "dd.MM.yyyy HH:mm:ss:sss zzz" locale = "de,DE"/>
         </tstamp>
-        <echo>Build Datum ${TODAY}</echo>
-
-        <echo>Apache Ant Version:	${ant.version}</echo>
+        <echo>Build Date: ${TODAY}</echo>
+        <echo>Apache Ant Version: ${ant.version}</echo>
     </target>
 
-    <target name="clean">
-        <delete dir="${build.dir}"/>
+    <target name = "clean" description = "Clean output directory" depends = "info">
+        <delete dir = "${build.dir}" />
+        <echo>Delete successful</echo>
     </target>
 
-    <target name="build" depends="clean">
+    <target name = "build" depends = "clean">
         <mkdir dir="${build.dir}"/>
-        <copy todir="build/src">
+        <copy todir="${build.dir}/src">
             <fileset dir="src"/>
         </copy>
-        <copy todir="build/tests">
+        <copy todir="${build.dir}/tests">
             <fileset dir="tests"/>
         </copy>
-        <copy file="package.json" todir="build"/>
-        <copy file="package-lock.json" todir="build"/>
-        <copy file="stencil.config.ts" todir="build"/>
-        <copy file="tsconfig.json" todir="build"/>
+        <copy file="package.json" todir="${build.dir}"/>
+        <copy file="package-lock.json" todir="${build.dir}"/>
+        <copy file="stencil.config.ts" todir="${build.dir}"/>
+        <copy file="tsconfig.json" todir="${build.dir}"/>
+
+        <echo>Install dependencies:</echo>
+        <exec executable="npm" os="Mac OS X">
+            <arg line="install"/>
+        </exec>
+
+        <echo>Testing:</echo>
+        <exec executable="npm" os="Mac OS X">
+            <arg line="run test" />
+        </exec>
+
+        <echo>Build:</echo>
+        <exec executable="npm" os="Mac OS X">
+            <arg line="run build" />
+        </exec>
     </target>
-
-    <exec executable="npm">
-        <arg line="install" />
-        <arg line="run test" />
-        <arg line="run build" />
-    </exec>
-
 </project>
