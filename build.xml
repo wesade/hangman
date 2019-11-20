@@ -19,31 +19,31 @@
     </target>
 
     <target name = "build" depends = "clean">
-        <mkdir dir="${build.dir}"/>
-        <copy todir="${build.dir}/src">
-            <fileset dir="src"/>
+        <mkdir dir = "${build.dir}"/>
+        <copy todir = "${build.dir}/src">
+            <fileset dir = "src"/>
         </copy>
-        <copy todir="${build.dir}/tests">
-            <fileset dir="tests"/>
+        <copy todir = "${build.dir}/tests">
+            <fileset dir = "tests"/>
         </copy>
-        <copy file="package.json" todir="${build.dir}"/>
-        <copy file="package-lock.json" todir="${build.dir}"/>
-        <copy file="stencil.config.ts" todir="${build.dir}"/>
-        <copy file="tsconfig.json" todir="${build.dir}"/>
+        <copy file = "package.json" todir = "${build.dir}"/>
+        <copy file = "package-lock.json" todir = "${build.dir}"/>
+        <copy file = "stencil.config.ts" todir = "${build.dir}"/>
+        <copy file = "tsconfig.json" todir = "${build.dir}"/>
 
         <echo>Install dependencies:</echo>
-        <exec executable="npm" os="Mac OS X">
+        <exec executable = "npm" os = "Mac OS X">
             <arg line="install"/>
         </exec>
 
         <echo>Testing:</echo>
-        <exec executable="npm" os="Mac OS X">
+        <exec executable = "npm" os = "Mac OS X">
             <arg line="run test" />
         </exec>
 
         <echo>Build:</echo>
-        <exec executable="npm" os="Mac OS X">
-            <arg line="run build" />
+        <exec executable = "npm" os = "Mac OS X">
+            <arg line = "run build" />
         </exec>
     </target>
 </project>
