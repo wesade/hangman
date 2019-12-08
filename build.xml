@@ -32,17 +32,17 @@
         <copy file = "tsconfig.json" todir = "${build.dir}"/>
 
         <echo>Install dependencies:</echo>
-        <exec executable = "npm" os = "Mac OS X">
+        <exec executable = "npm">
             <arg line="install"/>
         </exec>
 
         <echo>Testing:</echo>
-        <exec executable = "npm" os = "Mac OS X">
+        <exec executable = "npm">
             <arg line="run test" />
         </exec>
 
         <echo>Build:</echo>
-        <exec executable = "npm" os = "Mac OS X">
+        <exec executable = "npm">
             <arg line = "run build" />
         </exec>
     </target>
